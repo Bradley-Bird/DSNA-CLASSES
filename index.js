@@ -6,15 +6,15 @@ class Stack {
     }
 
     push(item) {
-        this.#list.unshift(item);
+        this.#list.push(item);
     }
 
-    pop(item) {
-        this.#list.shift(item);
+    pop() {
+        return this.#list.pop();
     }
 
     peek() {
-        return this.#list.slice(-1)[0];
+        return this.#list.length - 1;
     }
 
     get publicList() {
@@ -27,10 +27,41 @@ const newList = new Stack();
 newList.push('bob');
 newList.push('amy');
 newList.push('jerrod');
-newList.pop();
-newList.peek();
+// newList.pop();
+// newList.peek();
 console.log('public', newList.publicList);
 
-class Queue {}
+class Queue {
+    #list = [];
 
-module.exports = { Stack, Queue };
+    constructor(initialList) {
+        if (initialList) this.#list = initialList;
+    }
+
+    get publicList() {
+        return this.#list.toString();
+    }
+
+    enqueue(item) {
+        this.#list.push(item);
+    }
+    dequeue(item) {
+        return this.#list.shift(item);
+    }
+
+    get hasNext() {
+        return !!this.#list.length;
+    }
+}
+
+function reverse(array) {
+    const newArray = new Stack();
+    let reversedArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        reversedArray = [...reversedArray, newArray.pop()];
+    }
+    return reversedArray;
+}
+
+module.exports = { Stack, Queue, reverse };

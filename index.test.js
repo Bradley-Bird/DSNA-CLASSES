@@ -14,3 +14,7 @@ describe('Stack Class', () => {
         expect(stack.peek()).toEqual(1);
     });
 });
+
+// describe('#reverse', () => {
+//     expect(reverse([1, 2, 3]));
+// });
